@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RestSharp;
 
 namespace WebApp.Controllers
 {
@@ -12,82 +13,35 @@ namespace WebApp.Controllers
         // GET: Ludo
         public ActionResult Index()
         {
+            // Retrive the name of a specific Ludo game using the REST API
+            var client = new RestClient("http://localhost:56522");
+
+            var request = new RestRequest("ludo", Method.GET);
+            IRestResponse<List<string>> ludoGameResponse = client.Execute<List<string>>(request);
+            var games = ludoGameResponse.Data;
+
             return View();
         }
 
-        // GET: Ludo/Details/5
-        public ActionResult Details(int id)
+        //[HttpPost]
+        // GET: Ludo/CreateStartGame
+        public ActionResult CreateStartGame()
         {
+            // Anrop API med RestSharp
+            // 1: skapa spel POST
+            // 2: lägg till spelera POST
+            // 3: starta spel PUT
+            return View("Game");
+        }
+
+        public ActionResult Game()
+        {
+            // eg fetch all player locations from api using restsharp
+            // skickar data till View om spelet
+            // data kan vara placeringen av alla pjäser
+
             return View();
         }
-
-        // GET: Ludo/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Ludo/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Ludo/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Ludo/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Ludo/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Ludo/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
     }
 }
