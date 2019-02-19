@@ -5,13 +5,16 @@
 }
 
 <h2>Index </h2>
-<form action="/action_Game.cshtml">
+<form action="Game/Start">
     @for (var i = 1; i < 5; i++)
     {
-        <h2> Player(@i)</h2>
-        <input type="text" name="name@i" /><br>
+        <h2> Player @i</h2>
+       
+            var test = "name" + i;
+        
+        <input type="text" name="@test" /><br>
 
-     
+
 
 
     }
