@@ -1,10 +1,10 @@
-﻿@model IEnumerable<WebApp.Controllers.Game>
+﻿@model IEnumerable<WebApp.Models.Player>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "AllPlayers";
 }
 
-<h2>Index</h2>
+<h2>AllPlayers</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -14,6 +14,9 @@
         <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Color)
                 </th>
             <th></th>
         </tr>
@@ -25,8 +28,7 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new {  id=item.Name  }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Name  })
+                @Html.DisplayFor(modelItem => item.Color)
             </td>
         </tr>
 }

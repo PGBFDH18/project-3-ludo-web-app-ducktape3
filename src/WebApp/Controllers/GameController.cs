@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using RestSharp;
 using WebApp.Code;
 using WebApp.Models;
 
@@ -12,24 +13,35 @@ namespace WebApp.Controllers
 {
     public class GameController : Controller
     {
+        private readonly RestClient _client;
+        public GameController()
+        {
+            _client = new RestClient("http://localhost:56522");
+
+            //var request = new RestRequest("ludo", Method.GET);
+            //IRestResponse<List<string>> ludoGameResponse = client.Execute<List<string>>(request);
+            //var games = ludoGameResponse.Data;
+        }
         // GET: /<controller>/
         public IActionResult Index()
         {
             return View();
         }
-
-        public IActionResult Start(string name1, string name2, string name3, string name4)
+        public IActionResult AllPlayers(Team team)
         {
-            var apiSimulator = new ApiSimulator();
-            apiSimulator.RollDiece();
-            Team t = new Team();
-            t.Name1 = name1;
-            t.Name2 = name2;
-            t.Name3 = name3;
-            t.Name4 = name4;
+            //var apiSimulator = new ApiSimulator();
+            //apiSimulator.RollDiece();
+
+
+            return View(team.Players);
+        }
+        public IActionResult Start(Team team)
+        {
+            //var apiSimulator = new ApiSimulator();
+            //apiSimulator.RollDiece();
             
             
-            return View(t);
+            return View(team);
         }
 
     }

@@ -1,0 +1,33 @@
+﻿@model WebApp.Models.Team
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Team</h4>
+    <hr />
+    <dl class="dl-horizontal"></dl>
+    <ul>
+        @if (Model.Players != null)
+        {
+            @foreach (var players in Model.Players)
+            {
+                <li>players</li>
+                <li>
+                    @Html.ActionLink("Edit", "PlayerEdit", new { id = Model.gameId, player = players})
+                </li>
+                <li>
+                    @Html.ActionLink("Details", "PlayerDetails", new { id = Model.gameId, player = players })
+                </li>
+
+            }
+        }
+    </ul>
+
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
