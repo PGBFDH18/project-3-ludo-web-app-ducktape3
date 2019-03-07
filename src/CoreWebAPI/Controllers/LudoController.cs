@@ -96,7 +96,7 @@ namespace CoreWebAPI.Controllers
         /// <param name="color"></param>
         /// <returns></returns>
         [HttpPut("{gameId}/players/{playerId}")]
-        public Player UpdatePlayer(string gameId, int playerId, string name, PlayerColor color)
+        public Player UpdatePlayer(string gameId, int playerId, [FromQuery] string name, [FromQuery] PlayerColor color)
         {
             var player = _games.GetGame(gameId).GetPlayers().FirstOrDefault(x => x.PlayerId == playerId);
             player.Name = name;

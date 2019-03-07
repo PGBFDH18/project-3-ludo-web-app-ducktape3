@@ -197,7 +197,8 @@ namespace LudoGameEngine
         public Player ChangePlayerPiece(LudoGame game, string gameId, int playerId, int pieceId, int numberOfFields)
         {
             var gamestate = game.GetGameState();
-            if (gamestate != GameState.Started)
+            
+            if (gamestate != GameState.Started && gamestate != GameState.Ended)
             {
                 game.StartGame();
             }
@@ -212,7 +213,6 @@ namespace LudoGameEngine
             {
                 return null;
             }
-
             return winner;
         }
     }
