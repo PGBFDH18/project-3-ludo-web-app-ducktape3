@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using log4net;
-using log4net.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -16,7 +14,6 @@ namespace WebApp
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            BasicConfigurator.Configure(LogManager.CreateRepository("LudoLog"));
 
         }
 
