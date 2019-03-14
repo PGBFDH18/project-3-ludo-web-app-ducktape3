@@ -1,0 +1,61 @@
+﻿@using WebApp.Controllers
+@model WebApp.Models.Team
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Team: @Html.DisplayFor(x => x.gameId)</h4>
+    <hr />
+    <dl class="dl-horizontal"></dl>
+    <ul>
+        @if (Model.Players != null)
+        {
+            @foreach (var players in Model.Players)
+            {
+                <li>@players.Name</li>
+                <li>
+                    @Html.ActionLink("Edit", "PlayerEdit", new { id = Model.gameId, playerId = players.PlayerId })
+                </li>
+                <li>
+                    @Html.ActionLink("Details", "PlayerDetails", new { id = Model.gameId, player = players })
+                </li>
+                <li>
+
+                    @foreach (var peice in players.Pieces)
+                    {
+                    <ul>
+                        <li>
+                            @peice.Position
+                        </li>
+                        <li>
+                            @peice.PieceId
+                        </li>
+                        <li>
+                            @peice.State
+                        </li>
+                        <li>
+                            @Html.ActionLink("Move", nameof(LudoController.MoviePlayerPiece), "Ludo", new { id = Model.gameId, playerId = players.PlayerId, pieceId  = peice.PieceId })
+
+                        </li>
+                    </ul>
+
+
+                    }
+
+
+                </li>
+                <li>
+                </li>
+
+            }
+        }
+    </ul>
+
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
